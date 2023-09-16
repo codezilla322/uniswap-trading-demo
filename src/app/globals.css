@@ -2,26 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+@font-face {
+  font-family: PixelFont7;
+  src: url(/font/PixelFont7/pixelfont-7.ttf) format("truetype");
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+@font-face {
+  font-family: WorkSans;
+  src: url(/font/WorkSans/WOFF2/WorkSans-Regular.woff2) format("woff2"),
+    url(/fonts/WorkSans/WOFF/WorkSans-Regular.woff) format("woff"),
+    url(/fonts/WorkSans/TTF/WorkSans-Regular.ttf) format("truetype");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: WorkSans;
+  src: url(/font/WorkSans/WOFF2/WorkSans-Medium.woff2) format("woff2"),
+    url(/fonts/WorkSans/WOFF/WorkSans-Medium.woff) format("woff"),
+    url(/fonts/WorkSans/TTF/WorkSans-Medium.ttf) format("truetype");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: WorkSans;
+  src: url(/font/WorkSans/WOFF2/WorkSans-SemiBold.woff2) format("woff2"),
+    url(/fonts/WorkSans/WOFF/WorkSans-SemiBold.woff) format("woff"),
+    url(/fonts/WorkSans/TTF/WorkSans-SemiBold.ttf) format("truetype");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: WorkSans;
+  src: url(/font/WorkSans/WOFF2/WorkSans-Bold.woff2) format("woff2"),
+    url(/fonts/WorkSans/WOFF/WorkSans-Bold.woff) format("woff"),
+    url(/fonts/WorkSans/TTF/WorkSans-Bold.ttf) format("truetype");
+  font-weight: 700;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: white;
+  font-family: WorkSans;
 }
