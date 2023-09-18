@@ -28,7 +28,7 @@ export default function MainPanel() {
         setError(undefined);
       })
       .catch(setError);
-  }, []);
+  }, [connector]);
 
   return (
     <div className="mt-10 flex flex-col justify-center items-center">

@@ -18,7 +18,7 @@ export const getHooks = () => {
 export const sendTransaction = async (
   provider: Web3Provider,
   transactionRequest: TransactionRequest
-): Promise<TransactionState> => {
+): Promise<string> => {
   if (!provider) {
     throw new Error("Cannot execute a trade without a connected wallet");
   }
@@ -27,9 +27,5 @@ export const sendTransaction = async (
     transactionRequest,
   ]);
 
-  if (receipt) {
-    return TransactionState.Sent;
-  } else {
-    return TransactionState.Failed;
-  }
+  return receipt;
 };

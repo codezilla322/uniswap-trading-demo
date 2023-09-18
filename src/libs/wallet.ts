@@ -45,7 +45,7 @@ export async function wrapETH(
   provider: Web3Provider | undefined,
   address: string | undefined,
   eth: number
-): Promise<TransactionState> {
+): Promise<string> {
   if (!provider || !address) {
     throw new Error("Cannot wrap ETH without a provider and wallet address");
   }

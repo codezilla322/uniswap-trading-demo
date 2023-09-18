@@ -34,7 +34,7 @@ export const useBalance = (token: Token) => {
     if (connector && provider && address) initializeConnector();
 
     return () => clearInterval(intervalId);
-  }, [token, provider, address]);
+  }, [token, connector, provider, address]);
 
   return tokenBalance;
 };

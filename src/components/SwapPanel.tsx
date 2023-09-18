@@ -21,9 +21,10 @@ export default function SwapPanel() {
   const [tokenIn, setTokenIn] = useState<"WETH" | "USDC">("WETH");
   const [tokenOut, setTokenOut] = useState<"WETH" | "USDC">("USDC");
   const [isSwapping, setIsSwapping] = useState(false);
-  const [swapInfo, setSwapInfo] = useState("");
+  const [swapInfo, setSwapInfo] = useState<string | undefined>();
   const balanceIn = useBalance(Tokens[tokenIn]);
   const balanceOut = useBalance(Tokens[tokenOut]);
+  const [resultTxHash, setResultTxHash] = useState<string | undefined>();
 
   const onTokenSwap = () => {
     const temp = tokenIn;
@@ -38,15 +39,16 @@ export default function SwapPanel() {
     try {
       setIsSwapping(true);
       setError(undefined);
-      setSwapInfo("");
+      setSwapInfo(undefined);
+      setResultTxHash(undefined);
 
       // wrap ether to weth
       if (tokenIn === "WETH" && balanceIn < 0.001) {
         await connector.activate(ChainId.GOERLI);
         setSwapInfo("Trying to wrapping eth...");
-        const wrapTxState = await wrapETH(provider, address, 0.001);
-        if (wrapTxState == TransactionState.Sent) {
-          setSwapInfo(`Wrapping Succeess`);
+        const wrapTxHash = await wrapETH(provider, address, 0.001);
+        if (wrapTxHash) {
+          setSwapInfo("Wrapping succeed");
         }
       }
 
@@ -61,17 +63,18 @@ export default function SwapPanel() {
         address: address as string,
       };
       const tokenTrade = await createTrade(provider as Web3Provider, tradeData);
-
       setSwapInfo("Trade is created");
-      const tradeRes = await executeTrade(
+
+      const tradeTxHash = await executeTrade(
         provider as Web3Provider,
         tokenTrade,
         tradeData
       );
 
-      if (tradeRes == TransactionState.Sent) {
+      if (tradeTxHash) {
         setIsSwapping(false);
-        setSwapInfo("Trade is finished");
+        setSwapInfo(undefined);
+        setResultTxHash(tradeTxHash);
       }
     } catch (error) {
       setError(error as Error);
@@ -95,11 +98,22 @@ export default function SwapPanel() {
       </div>
 
       <div className="mt-4">
-        {!error && swapInfo && <p className="my-2 text-info">{swapInfo}</p>}
         {error?.message && (
           <p className="my-2 text-error">
             {error.message.slice(0, 40)}
             {"..."}
+          </p>
+        )}
+        {!error && swapInfo && <p className="my-2 text-info">{swapInfo}</p>}
+        {resultTxHash && (
+          <p className="my-2 text-info">
+            Trade is finished:{" "}
+            <a
+              href={`https://goerli.etherscan.io/tx/${resultTxHash}`}
+              target="_blank"
+            >
+              {`${resultTxHash.substring(0, 6)}...${resultTxHash.slice(-4)}`}
+            </a>
           </p>
         )}
       </div>

@@ -89,7 +89,7 @@ export async function executeTrade(
   }
 
   // Give approval to the router to spend the token
-  const approvalTxRes = await getTokenTransferApproval(provider, tradeInput);
+  const approvalTxHash = await getTokenTransferApproval(provider, tradeInput);
 
   const options: SwapOptions = {
     slippageTolerance: new Percent(50, 10_000), // 50 bips, or 0.50%
@@ -146,7 +146,7 @@ async function getOutputQuote(
 export async function getTokenTransferApproval(
   provider: Web3Provider,
   tradeInput: TradeInput
-): Promise<TransactionState> {
+): Promise<string> {
   if (!provider || !tradeInput.address) {
     throw new Error("No Provider Found");
   }
