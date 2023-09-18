@@ -1,7 +1,6 @@
 import { initializeConnector } from "@web3-react/core";
 import { MetaMask } from "@web3-react/metamask";
 import { Web3Provider, TransactionRequest } from "@ethersproject/providers";
-import { TransactionState } from "./constants";
 
 const [connector, hooks] = initializeConnector<MetaMask>(
   (actions) => new MetaMask({ actions })

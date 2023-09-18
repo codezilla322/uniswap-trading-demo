@@ -22,7 +22,6 @@ import {
   ERC20_ABI,
   QUOTER_CONTRACT_ADDRESS,
   SWAP_ROUTER_ADDRESS,
-  TransactionState,
 } from "./constants";
 import { getPoolInfo } from "./pool";
 import { fromReadableAmount } from "./utils";

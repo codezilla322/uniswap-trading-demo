@@ -6,7 +6,6 @@ import {
   ERC20_ABI,
   MAX_FEE_PER_GAS,
   MAX_PRIORITY_FEE_PER_GAS,
-  TransactionState,
   WETH_ABI,
   WETH_CONTRACT_ADDRESS,
 } from "./constants";
