@@ -17,3 +17,5 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 This project uses Ethers.js, TypeScript, TailwindCSS.
 
 You can swap 0.001 ETH for USDC or 450000 USDC for ETH in a single swap.
+
+Automatically wraps Ether into WETH when WETH balance is less than 0.001.
