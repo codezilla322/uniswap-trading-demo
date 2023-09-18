@@ -14,4 +14,6 @@ npx next dev -H 127.0.0.1
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-This project uses TailwindCSS.
+This project uses Ethers.js, TypeScript, TailwindCSS.
+
+You can swap 0.001 ETH for USDC or 450000 USDC for ETH in a single swap.
