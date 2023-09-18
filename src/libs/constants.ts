@@ -61,11 +61,3 @@ export const WETH_ABI = [
 export const MAX_FEE_PER_GAS = 100000000000;
 export const MAX_PRIORITY_FEE_PER_GAS = 100000000000;
 export const TOKEN_AMOUNT_TO_APPROVE_FOR_TRANSFER = 500000;
-
-export enum TransactionState {
-  Failed = "Failed",
-  New = "New",
-  Rejected = "Rejected",
-  Sending = "Sending",
-  Sent = "Sent",
-}

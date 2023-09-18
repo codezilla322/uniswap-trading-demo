@@ -4,7 +4,7 @@ import { Web3Provider } from "@ethersproject/providers";
 
 import TokenSelector from "./TokenSelector";
 import { getConnector, getHooks } from "@/libs/metamask";
-import { Tokens, TransactionState } from "@/libs/constants";
+import { Tokens } from "@/libs/constants";
 import { wrapETH } from "@/libs/wallet";
 import { formatBalance } from "@/libs/utils";
 import { createTrade, executeTrade } from "@/libs/trading";
