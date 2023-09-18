@@ -1,37 +1,24 @@
-import { useState } from "react";
 import Image from "next/image";
 import Token from "./Token";
 
-type TokenSelectorProps = {
-  startToken: string;
-  setStartToken: (token: string) => void;
-  endToken: string;
-  setEndToken: (token: string) => void;
+type Props = {
+  fromETH: boolean;
+  onTokenSwap: () => void;
 };
 
-export default function TokenSelector({
-  startToken,
-  setStartToken,
-  endToken,
-  setEndToken,
-}: TokenSelectorProps) {
-  const [fromETH, setFromETH] = useState(true);
-
-  const onSwapSelector = () => {
-    setFromETH(!fromETH);
-    const temp = startToken;
-    setStartToken(endToken);
-    setEndToken(temp);
-  };
-
+export default function TokenSelector({ fromETH, onTokenSwap }: Props) {
   return (
-    <div className={`mt-4 flex space-around ${!fromETH && "flex-row-reverse"}`}>
+    <div
+      className={`w-full mt-4 flex justify-between ${
+        fromETH ? "" : "flex-row-reverse"
+      }`}
+    >
       <div className="w-[200px] flex justify-center">
-        <Token token="ETH" selected />
+        <Token token="ETH" />
       </div>
 
       <div className="w-[100px] flex justify-center">
-        <button onClick={() => onSwapSelector()}>
+        <button onClick={() => onTokenSwap()}>
           <Image
             src="/images/other/swap.svg"
             alt="swap"
@@ -41,14 +28,8 @@ export default function TokenSelector({
         </button>
       </div>
 
-      <div className="w-[200px] flex justify-center gap-4">
-        {["USDT", "WBTC"].map((token) => (
-          <Token
-            token={token}
-            setToken={fromETH ? setEndToken : setStartToken}
-            selected={startToken === token || endToken === token}
-          />
-        ))}
+      <div className="w-[200px] flex justify-center">
+        <Token token="USDC" />
       </div>
     </div>
   );

@@ -1,32 +1,29 @@
 "use client";
 
-import { initializeConnector } from "@web3-react/core";
-import { MetaMask } from "@web3-react/metamask";
 import { useCallback, useEffect, useState } from "react";
+import { ChainId } from "@uniswap/sdk-core";
+
 import AccountInfo from "./AccountInfo";
 import SwapPanel from "./SwapPanel";
-
-const [connector, hooks] = initializeConnector<MetaMask>(
-  (actions) => new MetaMask({ actions })
-);
-const { useChainId, useAccounts, useIsActive, useProvider } = hooks;
+import { getConnector, getHooks } from "@/libs/metamask";
 
 export default function MainPanel() {
+  const connector = getConnector();
+  const { useIsActive } = getHooks();
+
   useEffect(() => {
     void connector.connectEagerly().catch(() => {
       console.log("Failed to connect to metamask");
     });
   }, []);
 
-  const chainId = useChainId();
-  const accounts = useAccounts();
   const isActive = useIsActive();
 
   const [Error, setError] = useState<Error | undefined>(undefined);
 
   const onConnect = useCallback(() => {
     connector
-      .activate(parseInt(process.env.chainID || "1"))
+      .activate(ChainId.GOERLI)
       .then(() => {
         setError(undefined);
       })
@@ -37,7 +34,7 @@ export default function MainPanel() {
     <div className="mt-10 flex flex-col justify-center items-center">
       {isActive ? (
         <>
-          {accounts && <AccountInfo account={accounts[0]} />}
+          <AccountInfo />
           <SwapPanel />
         </>
       ) : (
@@ -49,7 +46,12 @@ export default function MainPanel() {
         </button>
       )}
 
-      {Error && <p className="mt-6 text-error">{Error.message}</p>}
+      {Error && (
+        <p className="mt-6 text-error">
+          {Error.message.slice(0, 40)}
+          {"..."}
+        </p>
+      )}
     </div>
   );
 }

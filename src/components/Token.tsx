@@ -2,20 +2,11 @@ import Image from "next/image";
 
 type Props = {
   token: string;
-  selected: boolean;
-  setToken?: (token: string) => void;
 };
 
-export default function Token({ token, selected, setToken }: Props) {
+export default function Token({ token }: Props) {
   return (
-    <button
-      className={`w-12 h-12 p-1 flex items-center justify-center border rounded-md border-grey hover:bg-grey-hover active:bg-grey-active cursor-pointer ${
-        selected && "bg-grey-hover"
-      }`}
-      onClick={() => {
-        setToken && setToken(token);
-      }}
-    >
+    <button className="w-12 h-12 p-1 flex items-center justify-center border rounded-md border-grey hover:bg-grey-hover cursor-pointer">
       <Image
         width={40}
         height={40}

@@ -7,9 +7,6 @@ const nextConfig = {
     });
     return config;
   },
-  env: {
-    chainID: 5,
-  },
 };
 
 module.exports = nextConfig;
